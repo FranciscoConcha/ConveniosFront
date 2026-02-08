@@ -21,3 +21,167 @@
   padding: 10px 20px;
   font-size: 13px;
 }
+
+
+footer {
+    background-color: #222222;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.header-footer {
+    display: flex;
+    gap: 30px;
+}
+
+.footer-ul {
+    display: flex;
+    list-style-type: none;
+    gap: 5em;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.footer-li {
+    font-size: 1em;
+}
+
+.footer-contact {
+    margin-right: 5%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: space-between
+}
+
+.footer-contact-university {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5px;
+}
+
+.footer-contact-university a {
+    color: white;
+    list-style: none;
+    text-decoration: none;
+}
+
+.footer-contact-university a:hover {
+  color: yellow;
+}
+
+.footer-contact-group img {
+    width: 59px;
+    height: 59px;
+    object-fit: cover;
+
+    margin-bottom: 0.5em;
+}
+
+#logo-disc {
+  width: 65px;
+  height: 65px;
+}
+
+.group-footer-contact-media {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 2em;
+  
+}
+
+.footer-contact-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.footer-contact-university p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.footer-contact-media {
+    list-style-type: none;
+    margin: 0px;
+
+    padding-left: 2em;
+    padding-right: 2em;
+
+
+}
+
+.footer-contact-media h4 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.footer-contact-media li {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+
+    font-size: 15px;
+}
+
+.footer-contact-media a {
+    color: white;
+    font-size: 15px;
+}
+
+.footer-contact-media p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.footer-author {
+  display: flex;
+  justify-content:end;
+  align-items: end;
+}
+
+@media (max-width: 768px) { 
+
+
+   footer {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .footer-ul {
+        margin-bottom: 2em;
+        font-size: 10px;
+    }
+
+    .footer-contact {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+
+    .footer-contact-university p {
+        margin: 0;
+        font-size: 10px;
+    }
+
+    .footer-contact-university img {
+        width: 35px;
+        height: 35px;
+        object-fit: cover;
+        margin-left: 0px;
+        margin-bottom: 0.5em;
+    }
+
+    .footer-contact-university a {
+        font-size: 12px;
+    }
+    
+
+    .footer-ul {
+        padding-left: 0px;
+    }
+
+}

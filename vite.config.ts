@@ -10,4 +10,9 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    allowedHosts: [
+      'demanding-you-females-education.trycloudflare.com'
+    ]
+  }
 })
