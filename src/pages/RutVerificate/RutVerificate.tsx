@@ -10,16 +10,17 @@ export default function RutVerificate(){
     const [Error, SetError] = useState("");
     const navigate= useNavigate();
 
+    const RUT_REGEX =  /^[0-9]{7,9}$|^[0-9]{7,8}-[0-9kK]$|^[0-9]{1,2}(\.[0-9]{3}){2}-[0-9kK]$/;
+
     const ValidateRut=(rut: string)=>{
         rut = rut.trim();
-        const re = /^[0-9]{7,9}$|^[0-9]{7,8}-[0-9kK]$|^[0-9]{1,2}(\.[0-9]{3}){2}-[0-9kK]$/;
-        return re.test(rut);
+        return RUT_REGEX.test(rut);
     }
     
 
     const handleVerificateRut=()=>{
         if(!ValidateRut(Rut)){
-            SetError("Rut no valido en formato no valido");    
+            SetError("RUT no valido en formato no valido");    
             console.log(Error);        
             return;
         }
@@ -37,7 +38,7 @@ export default function RutVerificate(){
         <div className="main-container">
             <div className="card">
                 <div className="card-header">
-                    <h1 className="card-title">Comprobar rut</h1>
+                    <h1 className="card-title">Comprobar RUT</h1>
                     <div className="card-underline"></div>
                 </div>
 

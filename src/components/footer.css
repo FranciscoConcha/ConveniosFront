@@ -110,8 +110,6 @@ footer {
 
     padding-left: 2em;
     padding-right: 2em;
-
-
 }
 
 .footer-contact-media h4 {
@@ -141,6 +139,13 @@ footer {
   display: flex;
   justify-content:end;
   align-items: end;
+}
+
+.footer-author p {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0px;
+  padding: 0px;
 }
 
 @media (max-width: 768px) { 
