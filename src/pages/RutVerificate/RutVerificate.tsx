@@ -10,7 +10,6 @@ export default function RutVerificate(){
     const [Error, SetError] = useState("");
     const navigate= useNavigate();
 
-
     const ValidateRut=(rut: string)=>{
         rut = rut.trim();
         const re = /^[0-9]{7,9}$|^[0-9]{7,8}-[0-9kK]$|^[0-9]{1,2}(\.[0-9]{3}){2}-[0-9kK]$/;
@@ -26,7 +25,7 @@ export default function RutVerificate(){
         }
         SetError("");
         SetVerificate(true);
-        //navigate()
+        navigate('/CardDisplay')
         
     }
     const handleRutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,9 +49,11 @@ export default function RutVerificate(){
                         className="input-Rut"
                     ></input>
                     {Error &&<p className="error-message" style={{color :"red"}}>{Error}</p>}
+                    {Verificate && <p style={{color: "green"}}>RUT verificado correctamente</p>}
 
                     <button 
                         className="btn btn-primary"
+                        
                         onClick={handleVerificateRut}
                     >
                         Ingresar a la tarjeta

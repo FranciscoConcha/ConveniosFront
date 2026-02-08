@@ -1,27 +1,19 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Main.css"
 
 export default function Main(){
-    const [AdminBtn, SetAdminBtn] = useState(false);
-    const [CardBtn, SetCardBtn] = useState(false);
-    const [InfoBtn, SetInfoBtn] = useState(false);
     const navigate= useNavigate();
     
     const handleVerificarRUT = () => {
-        SetCardBtn(true);
-        
         navigate('/VerificateRut');
     };
 
     const handleIngresarAdmin = () => {
-        SetAdminBtn(true);
         // Aquí tu lógica para admin
         // navigate('/admin');
     };
 
     const handlePadlet = () => {
-        SetInfoBtn(true);
         // Aquí tu lógica para padlet
         //window.open('https://padlet.com/...', '_blank'); // Reemplaza con tu URL
     };
