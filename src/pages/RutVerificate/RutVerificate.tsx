@@ -28,6 +28,9 @@ export default function RutVerificate(){
         navigate('/CardDisplay')
         
     }
+    const handleBackToHome =()=>{
+        navigate("/home");
+    }
     const handleRutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         SetRut(e.target.value);
         SetError(""); 
@@ -58,7 +61,13 @@ export default function RutVerificate(){
                     >
                         Ingresar a la tarjeta
                     </button>
-
+                    <button 
+                        className="btn btn-primary"
+                        
+                        onClick={handleBackToHome}
+                    >
+                        Menú principal
+                    </button>
 
                 </div>
             </div>

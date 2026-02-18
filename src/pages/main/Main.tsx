@@ -9,13 +9,12 @@ export default function Main(){
     };
 
     const handleIngresarAdmin = () => {
-        // Aquí tu lógica para admin
-        // navigate('/admin');
+        
+        navigate('/AdminLogin');
     };
 
     const handlePadlet = () => {
-        // Aquí tu lógica para padlet
-        //window.open('https://padlet.com/...', '_blank'); // Reemplaza con tu URL
+        navigate("/Convenios")
     };
 
     return(

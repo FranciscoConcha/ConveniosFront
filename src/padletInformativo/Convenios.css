@@ -1,0 +1,232 @@
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: linear-gradient(to top, #727272, #c0c0c0);
+    padding: 40px 20px;
+    padding-bottom: 120px;
+}
+
+.convenios-container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.convenios-title {
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 0 0 10px 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.convenios-subtitle {
+    font-size: 18px;
+    color: #e0e0e0;
+    text-align: center;
+    margin: 0 0 50px 0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.convenios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.convenio-card {
+    background: linear-gradient(135deg, #4d62bd, #3537c7);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.convenio-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.convenio-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #5a6fcf, #4a5dc7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.convenio-image::before {
+    content: '📸';
+    font-size: 64px;
+    position: absolute;
+    opacity: 0.3;
+}
+
+.convenio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.convenio-content {
+    padding: 25px;
+    color: white;
+}
+
+.convenio-content h3 {
+    font-size: 24px;
+    margin: 0 0 15px 0;
+    font-weight: bold;
+}
+
+.convenio-description {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    color: #e8e8ff;
+}
+
+.convenio-how {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.convenio-how h4 {
+    font-size: 16px;
+    margin: 0 0 12px 0;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.convenio-how ol {
+    margin: 0;
+    padding-left: 20px;
+    color: #e8e8ff;
+}
+
+.convenio-how li {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.convenio-how li:last-child {
+    margin-bottom: 0;
+}
+
+.btn-back {
+    display: block;
+    margin: 0 auto;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #606060;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: #4a4a4a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(96, 96, 96, 0.4);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+    .convenios-title {
+        font-size: 32px;
+    }
+
+    .convenios-subtitle {
+        font-size: 16px;
+        margin-bottom: 35px;
+    }
+
+    .convenios-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .convenio-image {
+        height: 180px;
+    }
+
+    .convenio-content {
+        padding: 20px;
+    }
+
+    .convenio-content h3 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 30px 15px;
+        padding-bottom: 140px;
+    }
+
+    .convenios-title {
+        font-size: 28px;
+    }
+
+    .convenios-subtitle {
+        font-size: 14px;
+    }
+
+    .convenio-image {
+        height: 160px;
+    }
+
+    .convenio-content {
+        padding: 18px;
+    }
+
+    .convenio-content h3 {
+        font-size: 20px;
+    }
+
+    .convenio-description {
+        font-size: 14px;
+    }
+
+    .convenio-how {
+        padding: 12px;
+    }
+
+    .convenio-how h4 {
+        font-size: 15px;
+    }
+
+    .convenio-how li {
+        font-size: 13px;
+    }
+
+    .btn-back {
+        width: 100%;
+        padding: 12px 30px;
+    }
+}
+
+@media (max-width: 360px) {
+    .convenios-title {
+        font-size: 24px;
+    }
+
+    .convenio-image {
+        height: 140px;
+    }
+}
