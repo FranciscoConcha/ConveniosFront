@@ -9,7 +9,6 @@ export default function Main(){
     };
 
     const handleIngresarAdmin = () => {
-        
         navigate('/AdminLogin');
     };
 
@@ -41,7 +40,7 @@ export default function Main(){
                     </button>
 
                     <button 
-                        className="btn btn-secondary"
+                        className="btn btn-primary"
                         onClick={handlePadlet}
                     >
                         Información del convenio

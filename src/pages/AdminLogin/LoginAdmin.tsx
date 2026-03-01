@@ -4,17 +4,21 @@ import "./LoginAdmin.css";
 
 export default function LoginAdmin() {
   const navigate = useNavigate();
-  const [rut, setRut] = useState("");
+  const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (rut.trim() && password.trim()) {
+    if (correo.trim() && password.trim()) {
       navigate("/admin");
     } else {
       alert("Por favor ingresa RUT y contraseña");
     }
   };
+
+  const handleInit = ()=>{
+    navigate("/home");
+  }
 
   return (
     <div className="main-container">
@@ -26,13 +30,13 @@ export default function LoginAdmin() {
 
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="rut">RUT</label>
+            <label htmlFor="rut">Correo</label>
             <input
-              id="rut"
+              id="Correo"
               type="text"
-              value={rut}
-              onChange={(e) => setRut(e.target.value)}
-              placeholder="12.345.678-9"
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
+              placeholder="correo@dirección.com"
             />
           </div>
 
@@ -55,7 +59,7 @@ export default function LoginAdmin() {
               type="button"
               className="btn btn-secondary"
               onClick={() => {
-                setRut("");
+                setCorreo("");
                 setPassword("");
               }}
             >
@@ -65,7 +69,7 @@ export default function LoginAdmin() {
         </form>
 
         <div style={{ marginTop: 24 }}>
-          <button className="btn btn-back" onClick={() => window.history.back()}>
+          <button className="btn btn-back" onClick={handleInit}>
             Volver al inicio
           </button>
         </div>

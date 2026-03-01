@@ -3,10 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Degradado de abajo hacia arriba */
-    background: linear-gradient(to top,  #4d62bd, #3537c7);
+    background: linear-gradient(to top, #4d62bd, #3537c7);
     padding: 20px;
-    padding-bottom: 100px; /* Espacio para el footer */
 }
 
 .card {
@@ -17,6 +15,7 @@
     max-width: 450px;
     width: 100%;
     text-align: center;
+    margin-top: 66px; 
 }
 
 .card-header {
@@ -56,25 +55,25 @@
 }
 
 .btn-primary {
-    background-color: #606060;  /* Gris oscuro en lugar de azul */
-    color: white;
+    background-color: #3537c7 !important;
+    color: white !important;
 }
 
 .btn-primary:hover {
-    background-color: #4a4a4a;  /* Gris más oscuro al hover */
+    background-color: #2a2b9f !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(96, 96, 96, 0.4);
+    box-shadow: 0 4px 12px rgba(53, 55, 199, 0.4);
 }
 
 .btn-secondary {
-    background-color: #909090;  /* Gris medio en lugar de verde */
-    color: white;
+    background-color: #4d62bd !important;
+    color: white !important;
 }
 
 .btn-secondary:hover {
-    background-color: #757575;  /* Gris más oscuro al hover */
+    background-color: #3d4f9d !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(144, 144, 144, 0.4);
+    box-shadow: 0 4px 12px rgba(77, 98, 189, 0.4);
 }
 
 .card-logos {
@@ -95,22 +94,21 @@
 }
 
 .logo:hover {
-    border-color: #909090;
+    border-color: #4d62bd;
     transform: scale(1.05);
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
 
-/* Tablets (768px y menos) */
 @media (max-width: 768px) {
     .main-container {
         padding: 15px;
-        padding-bottom: 120px;
     }
 
     .card {
         padding: 40px 30px;
         max-width: 100%;
+        margin-top: -33px;
     }
 
     .card-title {
@@ -127,16 +125,15 @@
     }
 }
 
-/* Móviles (480px y menos) */
 @media (max-width: 480px) {
     .main-container {
         padding: 10px;
-        padding-bottom: 140px;
     }
 
     .card {
         padding: 30px 20px;
         border-radius: 6px;
+        margin-top: -33px;
     }
 
     .card-header {
@@ -174,7 +171,6 @@
     }
 }
 
-/* Móviles pequeños (360px y menos) */
 @media (max-width: 360px) {
     .card {
         padding: 25px 15px;
