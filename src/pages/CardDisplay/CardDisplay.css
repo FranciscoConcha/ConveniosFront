@@ -1,39 +1,58 @@
+/* CONTENEDOR PRINCIPAL */
 .main-container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to top, #727272, #c0c0c0);
+    background-color: #9b9b9b;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 20px;
-    padding-bottom: 100px;
 }
 
 .card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     width: 100%;
     max-width: 500px;
-    margin-top: 66px;
 }
 
 .card-instruction {
     color: white;
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: bold;
     text-align: center;
-    margin: 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenedor de la tarjeta con efecto flip */
+/* TARJETA CON FLIP */
 .card-flip {
     width: 100%;
-    max-width: 400px;
-    height: 250px;
+    height: 280px;
     position: relative;
     cursor: pointer;
     perspective: 1000px;
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    background-color: #555555;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-back {
+    transform: rotateY(180deg);
 }
 
 .card-flip.flipped .card-front {
@@ -44,254 +63,270 @@
     transform: rotateY(0deg);
 }
 
-/* Caras de la tarjeta */
-.card-face {
-    position: absolute;
+/* CARA FRONTAL */
+.card-front-content {
+    padding: 24px 28px 16px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-logo {
+    font-size: 42px;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+}
+
+.card-subtitle {
+    font-size: 15px;
+    color: #cccccc;
+    margin-top: 2px;
+}
+
+.card-chip-yellow {
+    width: 48px;
+    height: 36px;
+    background-color: #f1d302;
+    border-radius: 7px;
+    margin: 14px 0 12px 0;
+}
+
+.card-user-data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.data-row {
+    display: flex;
+    gap: 40px;
+}
+
+.data-group label {
+    font-size: 11px;
+    color: #bbbbbb;
+    display: block;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.data-value {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.full-width {
     width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    transition: transform 0.6s;
-    border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    padding: 25px;
+}
+
+.card-validity {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 12px;
+    color: #bbbbbb;
+    text-align: right;
+}
+
+/* CARA TRASERA */
+.magnetic-strip {
+    width: 100%;
+    height: 50px;
+    background: #000000;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.card-back-content {
+    padding: 18px 24px;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-/* Cara frontal */
-.card-front {
-    background: linear-gradient(135deg, #505050, #707070);
-    transform: rotateY(0deg);
-}
-
-.card-header-virtual {
-    text-align: left;
-}
-
-.card-logo {
-    font-size: 32px;
+.benefits-title {
+    font-size: 20px;
     font-weight: bold;
-    color: white;
-    margin: 0;
-    letter-spacing: 3px;
-}
-
-.card-subtitle {
-    color: #d0d0d0;
-    margin: 5px 0 0 0;
-    font-size: 14px;
-}
-
-.card-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.card-chip {
-    width: 50px;
-    height: 40px;
-    background: linear-gradient(135deg, #ffd700, #ffed4e);
-    border-radius: 8px;
-    position: relative;
-}
-
-.card-chip::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    background: linear-gradient(135deg, #e6c200, #ffd700);
-    border-radius: 4px;
-}
-
-.card-info {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.info-row {
-    display: flex;
-    gap: 15px;
-}
-
-.info-group {
-    flex: 1;
-}
-
-.info-group label {
-    display: block;
-    color: #b0b0b0;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-}
-
-.info-group p {
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
-    margin: 0;
-}
-
-.card-footer-virtual {
-    text-align: right;
-}
-
-.card-footer-virtual p {
-    color: #d0d0d0;
-    font-size: 12px;
-    margin: 0;
-}
-
-/* Cara trasera */
-.card-back {
-    background: linear-gradient(135deg, #606060, #808080);
-    transform: rotateY(180deg);
-}
-
-.magnetic-strip {
-    width: calc(100% + 50px);
-    height: 50px;
-    background: #2a2a2a;
-    margin: -25px -25px 20px -25px;
-    border-radius: 15px 15px 0 0;
-}
-
-.card-back-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.card-back-content h3 {
-    color: white;
-    font-size: 18px;
-    margin: 0;
     text-align: center;
+    margin-bottom: 10px;
+    color: white;
 }
 
 .benefits-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    color: white;
 }
 
 .benefits-list li {
-    padding: 5px 0;
-    font-size: 13px;
+    font-size: 14px;
+    margin-bottom: 7px;
     color: #e0e0e0;
 }
 
-.card-number {
-    margin-top: auto;
+.card-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 8px 0;
 }
 
-.card-number label {
-    display: block;
-    color: #b0b0b0;
+.card-id-section {
+    margin-top: 4px;
+}
+
+.card-id-label {
     font-size: 10px;
+    color: #b0b0b0;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+    display: block;
 }
 
-.card-number p {
+.card-id-value {
+    font-size: 12px;
     color: white;
-    font-size: 16px;
-    font-weight: 500;
     margin: 0;
-    letter-spacing: 2px;
+    word-break: break-all;
 }
 
-.card-footer-back {
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 10px;
+.monospace {
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.5px;
 }
 
-.card-footer-back p {
-    color: #d0d0d0;
+.card-footer-text {
     font-size: 11px;
-    margin: 0;
+    color: #d0d0d0;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 0;
 }
 
-/* Botón de volver */
+/* BOTÓN VOLVER */
 .btn-back {
-    padding: 14px 40px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    background-color: #606060;
+    background-color: #555555;
     color: white;
-    transition: all 0.3s ease;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
 
 .btn-back:hover {
-    background-color: #4a4a4a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(96, 96, 96, 0.4);
+    background-color: #444444;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-
+/* RESPONSIVE - tablet y móvil */
 @media (max-width: 480px) {
     .card-flip {
-        max-width: 100%;
+        height: 240px;
+    }
+
+    .card-front-content {
+        padding: 18px 20px 12px 20px;
+    }
+
+    .card-logo {
+        font-size: 34px;
+    }
+
+    .card-subtitle {
+        font-size: 13px;
+    }
+
+    .card-chip-yellow {
+        width: 40px;
+        height: 30px;
+        margin: 10px 0;
+    }
+
+    .data-value {
+        font-size: 15px;
+    }
+
+    .data-group label {
+        font-size: 10px;
+    }
+
+    .card-validity {
+        font-size: 11px;
+    }
+
+    .magnetic-strip {
+        height: 40px;
+    }
+
+    .card-back-content {
+        padding: 14px 18px;
+    }
+
+    .benefits-title {
+        font-size: 17px;
+    }
+
+    .benefits-list li {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    .card-instruction {
+        font-size: 18px;
+    }
+}
+
+/* RESPONSIVE - iPhone mini (375px) */
+@media (max-width: 390px) {
+    .card-flip {
         height: 220px;
     }
 
-    .card-face {
-        padding: 20px;
+    .card-front-content {
+        padding: 14px 16px 10px 16px;
     }
 
     .card-logo {
         font-size: 28px;
     }
 
-    .card-instruction {
-        font-size: 16px;
-    }
-
-    .info-group p {
-        font-size: 14px;
-    }
-
-    .benefits-list li {
+    .card-subtitle {
         font-size: 12px;
     }
 
-    .btn-back {
-        width: 100%;
-        padding: 12px 30px;
-    }
-}
-
-@media (max-width: 360px) {
-    .card-flip {
-        height: 200px;
+    .card-chip-yellow {
+        width: 34px;
+        height: 26px;
+        margin: 8px 0;
     }
 
-    .card-face {
-        padding: 15px;
+    .data-value {
+        font-size: 13px;
     }
 
-    .card-logo {
-        font-size: 24px;
+    .data-row {
+        gap: 24px;
     }
 
-    .card-chip {
-        width: 40px;
-        height: 32px;
+    .benefits-title {
+        font-size: 15px;
+    }
+
+    .benefits-list li {
+        font-size: 11px;
+    }
+
+    .card-id-value {
+        font-size: 10px;
+    }
+
+    .card-instruction {
+        font-size: 16px;
     }
 }

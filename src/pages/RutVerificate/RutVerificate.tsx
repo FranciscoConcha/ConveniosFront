@@ -1,31 +1,53 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { cardServices } from "../../services/cardServices";
 import "./RutVerificate.css"
 
 
 export default function RutVerificate(){
-
     const [Verificate,SetVerificate] = useState(false);
     const [Rut,SetRut] = useState("");
     const [Error, SetError] = useState("");
     const navigate= useNavigate();
 
+    
     const ValidateRut=(rut: string)=>{
+        if(!Rut.trim()){
+            SetError("Por favor ingrese un rut");
+            return
+        }
         rut = rut.trim();
         const re = /^[0-9]{7,9}$|^[0-9]{7,8}-[0-9kK]$|^[0-9]{1,2}(\.[0-9]{3}){2}-[0-9kK]$/;
         return re.test(rut);
     }
     
 
-    const handleVerificateRut=()=>{
+    const handleVerificateRut=async ()=>{
         if(!ValidateRut(Rut)){
             SetError("Rut no valido en formato no valido");    
             console.log(Error);        
             return;
         }
+        
         SetError("");
-        SetVerificate(true);
-        navigate('/CardDisplay')
+        
+        try{
+            const response = await cardServices.verifityRut(Rut);
+            if (response.isValid){
+                SetVerificate(true);
+                navigate('/CardDisplay',{state:Rut})
+                return;
+            }
+            SetError(response.message)
+            SetVerificate(false);
+
+        }
+        catch(error:any){
+            SetError(error.response?.data?.message || "ERROR: PROBLEMAS CON EL SERVIDOR");
+        }finally{
+            SetVerificate(false);
+        }
+
         
     }
     const handleBackToHome =()=>{

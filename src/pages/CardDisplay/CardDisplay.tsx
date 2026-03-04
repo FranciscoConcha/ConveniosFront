@@ -1,12 +1,80 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./CardDisplay.css";
+import { cardServices } from "../../services/cardServices";
+import type { CardResponse } from "../../interfaces/card.type";
 
 export default function CardDisplay() {
     const [isFlipped, setIsFlipped] = useState(false);
+    const [data, SetData] = useState<CardResponse | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error,SetError] = useState<string | null>(null);
+    const navigate = useNavigate()
+
+    const location = useLocation();
+    const rut = location.state;
+
+    useEffect(()=>{
+        
+        const handleGetData=async () => {
+            try{
+                const response = await cardServices.getDataForCard(rut);
+                SetData({...response.card,
+                    periodStundet: new Date(response.card.periodStundet)
+                });
+            }catch(err:any){
+                SetError(err.response?.data?.message||"ERROR: No se cargaron los datos")
+                console.log("Error al obtener datos " + error);
+            } finally{
+                setLoading(false)
+            }
+        }
+        if (rut){
+            handleGetData();
+            console.log(data)
+        }
+    },[rut]);
+
+
+        
+    
+    const handleBackToHome =() =>{
+        navigate("/home");
+    }
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
     };
+
+    if (loading) {
+        return (
+            <div className="main-container">
+                <h2>Cargando tarjeta...</h2>
+            </div>
+        );
+    }
+    if (error) {
+        return (
+            <div className="main-container">
+                <h2 style={{ color: "red" }}>{error}</h2>
+                <button className="btn btn-back" onClick={handleBackToHome}>
+                    Volver al inicio
+                </button>
+            </div>
+        );
+    }
+
+    if (!data) {
+        return (
+            <div className="main-container">
+                <h2>No se encontraron datos</h2>
+                <button className="btn btn-back" onClick={handleBackToHome}>
+                    Volver al inicio
+                </button>
+            </div>
+        );
+    }
+    
 
     return (
         <div className="main-container">
@@ -14,68 +82,67 @@ export default function CardDisplay() {
                 <h2 className="card-instruction">Haz clic en la tarjeta para voltearla</h2>
                 
                 <div className={`card-flip ${isFlipped ? 'flipped' : ''}`} onClick={handleFlip}>
-                    {/* Cara frontal */}
+                    {/* CARA FRONTAL */}
                     <div className="card-face card-front">
-                        <div className="card-header-virtual">
-                            <h1 className="card-logo">DISC</h1>
-                            <p className="card-subtitle">Tarjeta Estudiantil</p>
-                        </div>
-                        
-                        <div className="card-body">
-                            <div className="card-chip"></div>
+                        <div className="card-front-content">
+                            <div className="card-header-main">
+                                <h1 className="card-logo">DISC</h1>
+                                <p className="card-subtitle">Tarjeta Estudiantil</p>
+                            </div>
                             
-                            <div className="card-info">
-                                <div className="info-group">
-                                    <label>Nombre</label>
-                                    <p>Juan Pérez González</p>
+                            <div className="card-chip-yellow"></div>
+                            
+                            <div className="card-user-data">
+                                <div className="data-group full-width">
+                                    <label>NOMBRE</label>
+                                    <p className="data-value">{data?.nameStudent}</p>
                                 </div>
                                 
-                                <div className="info-row">
-                                    <div className="info-group">
+                                <div className="data-row">
+                                    <div className="data-group">
                                         <label>RUT</label>
-                                        <p>12.345.678-9</p>
+                                        <p className="data-value">{data?.rut}</p>
                                     </div>
-                                    <div className="info-group">
-                                        <label>Carrera</label>
-                                        <p>Ingeniería</p>
+                                    <div className="data-group">
+                                        <label>CARRERA</label>
+                                        <p className="data-value">{data?.career}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div className="card-footer-virtual">
-                            <p>Válida hasta: 12/2025</p>
+
+                            {/* Fecha movida dentro del contenedor */}
+                            <div className="card-validity">
+                                <p>Válida hasta: {data?.periodStundet && new Date(data.periodStundet).toISOString().split("T")[0]}</p>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Cara trasera */}
+                    {/* CARA TRASERA */}
                     <div className="card-face card-back">
                         <div className="magnetic-strip"></div>
                         
                         <div className="card-back-content">
-                            <h3>Beneficios Incluidos</h3>
-                            
+                            <h3 className="benefits-title">Beneficios Incluidos</h3>
+
                             <ul className="benefits-list">
                                 <li>✓ Descuentos en alimentación</li>
-                                <li>✓ Transporte estudiantil</li>
                                 <li>✓ Material académico</li>
                                 <li>✓ Actividades deportivas</li>
-                                <li>✓ Eventos culturales</li>
                             </ul>
+
+                            <div className="card-divider"></div>
                             
-                            <div className="card-number">
-                                <label>Número de Tarjeta</label>
-                                <p>**** **** **** 5678</p>
+                            <div className="card-id-section">
+                                <label className="card-id-label">NÚMERO DE TARJETA</label>
+                                <p className="card-id-value monospace">{data.idCardPublic}</p>
                             </div>
-                        </div>
-                        
-                        <div className="card-footer-back">
-                            <p>Para más información visita disc.cl</p>
+                            
+                            <p className="card-footer-text">Para más información visita disc.cl</p>
                         </div>
                     </div>
                 </div>
                 
-                <button className="btn btn-back" onClick={() => window.history.back()}>
+                <button className="btn btn-back" onClick={handleBackToHome}>
                     Volver al inicio
                 </button>
             </div>
