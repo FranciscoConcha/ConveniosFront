@@ -8,6 +8,16 @@
     padding-bottom: 100px;
 }
 
+.error-message {
+  color: #e53e3e;
+  background-color: #fff5f5;
+  border: 1px solid #fc8181;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  margin-bottom: 12px;
+}
+
 .card {
     background-color: white;
     border-radius: 8px;

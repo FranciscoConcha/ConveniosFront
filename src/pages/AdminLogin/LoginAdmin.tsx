@@ -1,16 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginServices } from "../../services/loginServices";
 import "./LoginAdmin.css";
 
 export default function LoginAdmin() {
   const navigate = useNavigate();
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (correo.trim() && password.trim()) {
-      navigate("/admin");
+      const response = await loginServices.login(correo, password);
+      if(response.data == null){
+        setError(response.message);
+        return;
+      }
+      if(response.data.rol === "Admin" || response.data.rol === "CEAL"|| response.data.rol === "Empresa"){ 
+        navigate("/Admin/Students");
+      }
+      else{
+        setError("No tienes permisos para acceder a esta sección");
+      }
+      
     } else {
       alert("Por favor ingresa RUT y contraseña");
     }
@@ -50,6 +63,12 @@ export default function LoginAdmin() {
               placeholder="Ingresa tu contraseña"
             />
           </div>
+
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
 
           <div className="form-actions">
             <button className="btn btn-primary" type="submit">

@@ -1,6 +1,11 @@
-import axios, { AxiosError, type AxiosInstance } from 'axios';
+import axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig  } from 'axios';
 import { API_CONFIG } from '../config/api.config';
+import Cookies from 'js-cookie';
 
+
+interface CustomAxiosConfig extends AxiosRequestConfig {
+    skipAuth?: boolean;
+}
 class ApiService {
 
     private api: AxiosInstance;
@@ -17,7 +22,7 @@ class ApiService {
     
     this.api.interceptors.request.use(
         (config) => {
-            const token = localStorage.getItem('token');
+            const token = Cookies.get('token');
             if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -31,30 +36,30 @@ class ApiService {
         (response) => response,
         (error: AxiosError) => {
             if (error.response?.status === 401) {
-                localStorage.removeItem('token');
-                window.location.href = '/';
+                Cookies.remove('token');
+                window.location.href = '/Home';
             }
             return Promise.reject(error);
             }
         );
     }
 
-    public get<T>(url: string, config = {}) {
+    public get<T>(url: string, config: CustomAxiosConfig= {}) {
         return this.api.get<T>(url, config);
     }
 
-    public post<T>(url: string, data?: any, config = {}) {
+    public post<T>(url: string, data?: unknown, config: CustomAxiosConfig= {}) {
         return this.api.post<T>(url, data, config);
     }
 
-    public put<T>(url: string, data?: any, config = {}) {
+    public put<T>(url: string, data?: unknown, config: CustomAxiosConfig= {}) {
         return this.api.put<T>(url, data, config);
     }
 
-    public delete<T>(url: string, config = {}) {
+    public delete<T>(url: string, config: CustomAxiosConfig= {}) {
         return this.api.delete<T>(url, config);
     }
-    public patch<T>(url:string,data? :any,config={}){
+    public patch<T>(url:string,data? :unknown,config: CustomAxiosConfig={}){
         return this.api.patch<T>(url,data,config);
     }
 }

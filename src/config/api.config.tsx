@@ -17,7 +17,7 @@ export const API_CONFIG = {
     ESTUDIANTES:{
         OBTENERLISTA: '/api/student/',
         OBTENERPORID: '/api/student/id=',
-        ACTUALIZARPORID: '/api/student/state/id=',
+        ACTUALIZARESTADO: '/api/student/state/id=',
         ACTUALIZAR:'/api/student/update/id=',
         CREAR:'/api/student/',
         CARGAREXCEL: '/api/student/excel'

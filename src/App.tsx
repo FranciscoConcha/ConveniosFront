@@ -4,7 +4,9 @@ import Main from './pages/main/Main.tsx'
 import RutVerificate from './pages/RutVerificate/RutVerificate.tsx'
 import CardDisplay from './pages/CardDisplay/CardDisplay.tsx'
 import LoginAdmin from './pages/AdminLogin/LoginAdmin.tsx'
-import Convenios from './padletInformativo/Convenios.tsx'
+import Convenios from './pages/padletInformativo/Convenios.tsx'
+import ProtectedRoute from './components/protectRoute/protectRoute.tsx'
+import StudentAdmin from './admin/pages/CudStudent/crudStudet.tsx'
 function App() {
 
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path='CardDisplay' element ={<CardDisplay/>}/>
         <Route path='AdminLogin' element={<LoginAdmin/>}/>
         <Route path='Convenios' element= {<Convenios/>}/>
+        <Route path='Admin/Students' element={<ProtectedRoute><StudentAdmin/></ProtectedRoute>}/>
       </Routes>      
       <Footer/>
     </>
