@@ -4,6 +4,7 @@ import { studentAdminServices } from "../../Services/StudentAdminServices";
 import type { studentAdmin } from "../../interfaces/studentAdmin.type";
 import { loginServices } from "../../../services/loginServices";
 import "./crudStudent.css";
+import HamburgerMenu from "../../../components/hamburger/sideMenu";
 
 export default function StudentAdmin() {
     const [students, setStudents] = useState<studentAdmin[]>([]);
@@ -64,6 +65,53 @@ export default function StudentAdmin() {
             name: student.name,
             career: student.career,
         });
+    };
+    const handleExcelUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+
+        const file = event.target.files?.[0];
+
+        if (!file) return;
+
+        const extension = file.name.split(".").pop()?.toLowerCase();
+
+        if (extension !== "xlsx" && extension !== "xls") {
+            alert("El archivo debe ser .xlsx o .xls");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("input", file);
+
+        try {
+
+            const response = await fetch("http://localhost:5000/api/Student/Excel", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token") || ""}`
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.message);
+                return;
+            }
+
+            alert(data.message);
+
+            if (data.error?.length > 0) {
+                console.log("Errores en filas:", data.error);
+            }
+
+            // recargar estudiantes
+            loadStudents();
+
+        } catch (error) {
+            console.error(error);
+            alert("Error subiendo el Excel");
+        }
     };
 
     const handleCancelEdit = () => {
@@ -147,6 +195,7 @@ export default function StudentAdmin() {
 
     return (
         <div className="admin-container">
+            <HamburgerMenu />
             {/* HEADER */}
             <div className="admin-header">
                 <h1 className="admin-title">Gestión de Estudiantes</h1>
@@ -169,6 +218,17 @@ export default function StudentAdmin() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="search-input"
                 />
+                <div className="excel-upload">
+                <label className="btn-upload">
+                    Subir Excel
+                    <input 
+                        type="file"
+                        accept=".xlsx,.xls"
+                        onChange={handleExcelUpload}
+                        hidden
+                    />
+                </label>
+            </div>
                 
                 <div className="items-per-page">
                     <label>Mostrar:</label>
@@ -185,7 +245,10 @@ export default function StudentAdmin() {
                     </select>
                     <span>estudiantes</span>
                 </div>
+                
             </div>
+
+            
 
             {/* TABLA */}
             <div className="table-container">

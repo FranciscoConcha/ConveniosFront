@@ -1,6 +1,6 @@
 .admin-container {
     min-height: 100vh;
-    background: linear-gradient(to top, #727272, #c0c0c0);
+    background: linear-gradient(to top, #6a6a6a, #d6d6d6);
     padding: 40px 20px;
     padding-bottom: 120px;
 }
@@ -25,6 +25,19 @@
 .header-actions {
     display: flex;
     gap: 10px;
+}
+.btn-upload{
+    background:#4a4cb8;
+    color:white;
+    padding:10px 16px;
+    border-radius:6px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.btn-upload:hover{
+    background:#3b3d99;
 }
 
 .loading-message,
@@ -96,7 +109,7 @@
 }
 
 .students-table thead {
-    background: #acacad;
+    background: #6f6f72;
     color: white;
 }
 
@@ -115,7 +128,7 @@
 }
 
 .students-table tbody tr:hover {
-    background-color: #f5f5f5;
+    background-color: #f1f3ff;
 }
 
 .students-table tbody tr.inactive-row {
@@ -146,27 +159,27 @@
 }
 
 .status-badge.active {
-    background: #d4edda;
-    color: #155724;
+    background: #cfe6d3;
+    color: #2e5e38;
 }
 
 .status-badge.inactive {
-    background: #f8d7da;
-    color: #721c24;
+    background: #e9c6c6;
+    color: #7a2d2d;
 }
 
 /* INPUT DE EDICIÓN */
 .edit-input {
     width: 100%;
     padding: 6px 10px;
-    border: 2px solid #3537c7;
+    border: 2px solid #4a4cb8;
     border-radius: 4px;
     font-size: 14px;
 }
 
 .edit-input:focus {
     outline: none;
-    border-color: #2a2b9f;
+    border-color: #3b3d99;
 }
 
 /* ACCIONES DE TABLA */
@@ -187,39 +200,39 @@
 }
 
 .btn-edit {
-    background: #ffc107;
-    color: #333;
+    background: #d4a72c;
+    color: white;
 }
 
 .btn-edit:hover {
-    background: #e0a800;
+    background: #b89324;
 }
 
 .btn-deactivate {
-    background: #dc3545;
+    background: #b94a48;
     color: white;
 }
 
 .btn-deactivate:hover {
-    background: #c82333;
+    background: #a03e3c;
 }
 
 .btn-activate {
-    background: #28a745;
+    background: #4f8a5b;
     color: white;
 }
 
 .btn-activate:hover {
-    background: #218838;
+    background: #41744b;
 }
 
 .btn-save {
-    background: #28a745;
+    background: #4f8a5b;
     color: white;
 }
 
 .btn-save:hover {
-    background: #218838;
+    background: #41744b;
 }
 
 .btn-cancel {
@@ -244,7 +257,7 @@
 
 .btn-back {
     background: white;
-    color: #3537c7;
+    color: #4a4cb8;
 }
 
 .btn-back:hover {
@@ -274,8 +287,8 @@
 .pagination-btn {
     padding: 8px 16px;
     background: white;
-    color: #3537c7;
-    border: none;
+    color: #4a4cb8;
+    border: 1px solid #e2e2e2;
     border-radius: 6px;
     font-size: 14px;
     font-weight: 600;
@@ -301,7 +314,7 @@
     width: 36px;
     height: 36px;
     background: white;
-    color: #3537c7;
+    color: #4a4cb8;
     border: none;
     border-radius: 6px;
     font-size: 14px;
@@ -315,7 +328,7 @@
 }
 
 .pagination-number.active {
-    background: #3537c7;
+    background: #4a4cb8;
     color: white;
 }
 
