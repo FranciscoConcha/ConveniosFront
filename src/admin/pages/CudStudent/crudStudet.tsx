@@ -4,7 +4,7 @@ import { studentAdminServices } from "../../Services/StudentAdminServices";
 import type { studentAdmin } from "../../interfaces/studentAdmin.type";
 import { loginServices } from "../../../services/loginServices";
 import "./crudStudent.css";
-import HamburgerMenu from "../../../components/hamburger/sideMenu";
+import HamburgerMenu from "../../../components/SideMenu/sideMenu";
 
 export default function StudentAdmin() {
     const [students, setStudents] = useState<studentAdmin[]>([]);
@@ -229,7 +229,6 @@ export default function StudentAdmin() {
                     />
                 </label>
             </div>
-                
                 <div className="items-per-page">
                     <label>Mostrar:</label>
                     <select
