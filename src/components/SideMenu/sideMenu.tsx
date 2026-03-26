@@ -7,8 +7,14 @@ export default function SideMenu() {
   const [open, setOpen] = useState(false);
   const navegate = useNavigate();
   
-  const handledGoToStudens = ()=>{
-    navegate("/Admin/Students");
+  const handledGoToMain = ()=>{
+    navegate("/main");
+  }
+  const handleGoToStudents = ()=>{
+    navegate("/Students");
+  }
+  const handleGoToCards = ()=>{
+    navegate("/Card");
   }
   return (
     <>
@@ -25,9 +31,9 @@ export default function SideMenu() {
       >
         <h2>Menú</h2>
 
-        <a onClick={handledGoToStudens}>Inicio</a>
-        <a href="/estudiantes">Estudiantes</a>
-        <a href="/admin">Administración</a>
+        <a onClick={handledGoToMain}>Inicio</a>
+        <a onClick={handleGoToStudents} >Estudiantes</a>
+        <a onClick={handleGoToCards}>Tarjetas</a>
         <a href="/logout">Cerrar sesión</a>
       </div>
     </>

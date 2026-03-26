@@ -1,44 +1,47 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./CardDisplay.css";
 import { cardServices } from "../../services/cardServices";
-import type { CardResponse } from "../../interfaces/card.type";
+import type { ViewCardDto } from "../../interfaces/card.type";
 
 export default function CardDisplay() {
     const [isFlipped, setIsFlipped] = useState(false);
-    const [data, SetData] = useState<CardResponse | null>(null);
+    const [data, setData] = useState<ViewCardDto | null>(null);
     const [loading, setLoading] = useState(true);
-    const [error,SetError] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate()
-
     const location = useLocation();
     const rut = location.state;
+    const hasCalledRef = useRef(false);
 
     useEffect(()=>{
-        
-        const handleGetData=async () => {
-            try{
+        if (hasCalledRef.current || !rut) return;
+        hasCalledRef.current = true;
+
+        const handleGetData = async () => {
+            try {
                 const response = await cardServices.getDataForCard(rut);
-                SetData({...response.card,
-                    periodStundet: new Date(response.card.periodStundet)
-                });
-            }catch(err:any){
-                SetError(err.response?.data?.message||"ERROR: No se cargaron los datos")
-                console.log("Error al obtener datos " + error);
-            } finally{
-                setLoading(false)
+                
+                if (response?.success && response?.card) {
+                    setData({
+                        ...response.card,
+                        periodStundet: new Date(response.card.periodStundet).toISOString()
+                    });
+                } else {
+                    setError(response?.message || "ERROR: No se cargaron los datos");
+                }
+            } catch(err: unknown) {
+                setError("Error al obtener datos");
+                console.error(err);
+            } finally {
+                setLoading(false);
             }
         }
-        if (rut){
-            handleGetData();
-            console.log(data)
-        }
-    },[rut]);
-
-
         
-    
-    const handleBackToHome =() =>{
+        handleGetData();
+    }, [rut]);
+
+    const handleBackToHome = () => {
         navigate("/home");
     }
 
@@ -53,6 +56,7 @@ export default function CardDisplay() {
             </div>
         );
     }
+
     if (error) {
         return (
             <div className="main-container">
@@ -74,7 +78,6 @@ export default function CardDisplay() {
             </div>
         );
     }
-    
 
     return (
         <div className="main-container">
@@ -110,9 +113,9 @@ export default function CardDisplay() {
                                 </div>
                             </div>
 
-                            {/* Fecha movida dentro del contenedor */}
+                            {/* Fecha */}
                             <div className="card-validity">
-                                <p>Válida hasta: {data?.periodStundet && new Date(data.periodStundet).toISOString().split("T")[0]}</p>
+                                <p>Válida hasta: {new Date(data?.periodStundet).toISOString().split("T")[0]}</p>
                             </div>
                         </div>
                     </div>

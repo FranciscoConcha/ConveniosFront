@@ -8,6 +8,8 @@ import Convenios from './pages/padletInformativo/Convenios.tsx'
 import ProtectedRoute from './components/protectRoute/protectRoute.tsx'
 import StudentAdmin from './admin/pages/CudStudent/crudStudet.tsx'
 import AdminMain from './admin/pages/main/main.tsx'
+import CardAdmin from './admin/pages/crudCard/crudCard.tsx'
+import QRValidator from './admin/pages/QrValidator/QrValidator.tsx'
 function App() {
 
   return (
@@ -19,8 +21,10 @@ function App() {
         <Route path='CardDisplay' element ={<CardDisplay/>}/>
         <Route path='AdminLogin' element={<LoginAdmin/>}/>
         <Route path='Convenios' element= {<Convenios/>}/>
-        <Route path='Admin/Students' element={<ProtectedRoute><StudentAdmin/></ProtectedRoute>}/>
+        <Route path='Students' element={<ProtectedRoute><StudentAdmin/></ProtectedRoute>}/>
         <Route path='main' element={<ProtectedRoute><AdminMain/></ProtectedRoute>}/>
+        <Route path="card" element={<ProtectedRoute><CardAdmin/></ProtectedRoute>}/>
+        <Route path="QrVerify" element = {<ProtectedRoute><QRValidator/></ProtectedRoute>}/>
       </Routes>      
       <Footer/>
     </>

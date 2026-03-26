@@ -18,7 +18,7 @@ export default function LoginAdmin() {
         return;
       }
       if(response.data.rol === "Admin" || response.data.rol === "CEAL"|| response.data.rol === "Empresa"){ 
-        navigate("/Admin/Students");
+        navigate("/main");
       }
       else{
         setError("No tienes permisos para acceder a esta sección");

@@ -1,27 +1,37 @@
 export interface CardResponse {
-    idCardPublic: string,
-    nameStudent: string,
-    rut: string,
-    periodStundet: Date,
-    career: string
+    idCardPublic: string;
+    nameStudent: string;
+    rut: string;
+    periodStundet: string;
+    career: string;
 }
-export interface CardListOrIdResponse{
-    id:number,
-    idCardPublic: string,
-    nameStudent: string,
-    periodStundet: Date,
-    career: string,
-    uses:number
+
+export interface CardListOrIdResponse {
+    id: number;
+    idCardPublic: string;
+    nameStudent: string;
+    periodStundet: string;
+    career: string;
+    uses: number;
 }
-export interface VerifyResponse{
-    message:string,
-    card: CardResponse
+
+// ← AGREGAR ESTOS
+export type ViewCardDto = CardResponse;
+export type ViewCardListDto = CardListOrIdResponse;
+
+export interface VerifyResponse {
+    message: string;
+    success: boolean;
+    card?: CardResponse;
 }
-export interface VerifyAdminResponse{
-    message:string,
-    card: CardListOrIdResponse
+
+export interface VerifyAdminResponse {
+    message: string;
+    success: boolean;
+    student?: CardListOrIdResponse[];
 }
+
 export interface ResponseVerificateRut {
-    message:string,
-    isValid:boolean
+    message: string;
+    isValid: boolean;
 }

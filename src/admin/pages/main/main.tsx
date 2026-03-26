@@ -31,16 +31,16 @@ export default function AdminMain() {
         <article className="admin-main-card">
           <h2>Gestión de Estudiantes</h2>
           <p>Administra estudiantes, búsqueda, edición, estado activo/inactivo y carga de Excel.</p>
-          <button className="admin-main-btn admin-main-btn-primary" onClick={() => navigate("/Admin/Students")}>
+          <button className="admin-main-btn admin-main-btn-primary" onClick={() => navigate("/Students")}>
             Ir a estudiantes
           </button>
         </article>
 
         <article className="admin-main-card">
-          <h2>Gestión de Convenios/Tarjetas</h2>
-          <p>Sección preparada para administrar convenios y tarjetas desde el módulo admin.</p>
-          <button className="admin-main-btn admin-main-btn-disabled" disabled>
-            Próximamente
+          <h2>Gestión de Tarjetas</h2>
+          <p>Sección de visualización de uso de tarjetas.</p>
+          <button className="admin-main-btn admin-main-btn-primary" onClick={()=>navigate("/Card")}>
+            Ir a tarjetas
           </button>
         </article>
       </section>

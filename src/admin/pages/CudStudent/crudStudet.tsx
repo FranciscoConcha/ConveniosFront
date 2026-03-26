@@ -58,6 +58,47 @@ export default function StudentAdmin() {
             setLoading(false);
         }
     };
+    const getPaginationNumbers = () => {
+        const pages = [];
+        const maxButtons = 7; // máximo de botones a mostrar
+        
+        if (totalPages <= maxButtons) {
+            // Si hay pocos botones, mostrar todos
+            for (let i = 1; i <= totalPages; i++) {
+                pages.push(i);
+            }
+        } else {
+            // Mostrar: primera página, últimas, y alrededor de la actual
+            const range = 2;
+            
+            // Siempre mostrar página 1
+            pages.push(1);
+            
+            // Calcular rango alrededor de la actual
+            const start = Math.max(2, currentPage - range);
+            const end = Math.min(totalPages - 1, currentPage + range);
+            
+            // Agregar puntos si hay gap
+            if (start > 2) {
+                pages.push('...');
+            }
+            
+            // Agregar rango
+            for (let i = start; i <= end; i++) {
+                pages.push(i);
+            }
+            
+            // Agregar puntos si hay gap
+            if (end < totalPages - 1) {
+                pages.push('...');
+            }
+            
+            // Siempre mostrar última página
+            pages.push(totalPages);
+        }
+        
+        return pages;
+    };
 
     const handleEdit = (student: studentAdmin) => {
         setEditingId(student.id);
@@ -362,14 +403,18 @@ export default function StudentAdmin() {
                     </button>
                     
                     <div className="pagination-numbers">
-                        {[...Array(totalPages)].map((_, index) => (
-                            <button
-                                key={index + 1}
-                                className={`pagination-number ${currentPage === index + 1 ? 'active' : ''}`}
-                                onClick={() => handlePageChange(index + 1)}
-                            >
-                                {index + 1}
-                            </button>
+                        {getPaginationNumbers().map((page, index) => (
+                            page === '...' ? (
+                                <span key={`dots-${index}`} className="pagination-dots">...</span>
+                            ) : (
+                                <button
+                                    key={`page-${index}`}
+                                    className={`pagination-number ${currentPage === page ? 'active' : ''}`}
+                                    onClick={() => handlePageChange(page as number)}
+                                >
+                                    {page}
+                                </button>
+                            )
                         ))}
                     </div>
                     

@@ -1,16 +1,39 @@
-export interface cardAll{
-    id : number;
-    idCardPublic:string;
-    nameStudent:string;
-    periodStudent:string;
-    career:string;
-    uses:number;
+// card.type.ts
+
+export interface ViewCardDto {
+    idCardPublic: string;
+    nameStudent: string;
+    rut: string;
+    periodStundet: string;
+    career: string;
 }
-export interface responseCardAll{
-    student: cardAll[];
-    message: string;
+
+export interface ViewCardListDto {
+    id: number;
+    idCardPublic: string;
+    nameStudent: string;
+    periodStundet: string;
+    career: string;
+    uses: number;
 }
-export interface responseCardAllById{
-    student: cardAll;
+
+export interface ResponseViewCardDto {
     message: string;
+    success: boolean;
+    card?: ViewCardDto;
+}
+
+export interface ResponseViewCardListDto {
+    message: string;
+    success: boolean;
+    student?: ViewCardListDto[];
+}
+
+export interface ResponseVerificateRut {
+    message: string;
+    isValid: boolean;
+}
+
+export interface cardAll extends ViewCardListDto {
+    isActive?: boolean;
 }

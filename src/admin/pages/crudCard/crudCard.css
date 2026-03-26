@@ -1,0 +1,420 @@
+.admin-container {
+    min-height: 100vh;
+    background: linear-gradient(to top, #6a6a6a, #d6d6d6);
+    padding: 40px 20px;
+    padding-bottom: 120px;
+}
+
+.admin-header {
+    max-width: 1400px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-title {
+    font-size: 36px;
+    color: white;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.loading-message,
+.error-message {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    margin: 50px 0;
+}
+
+.error-message {
+    color: #ff6b6b;
+}
+
+/* CONTROLES DE TABLA */
+.table-controls {
+    max-width: 1400px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 300px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+    outline: 2px solid white;
+}
+
+.items-per-page {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: 500;
+}
+
+.select-items {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* TABLA */
+.table-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cards-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cards-table thead {
+    background: #6f6f72;
+    color: white;
+}
+
+.cards-table th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cards-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s;
+}
+
+.cards-table tbody tr:hover {
+    background-color: #f1f3ff;
+}
+
+.cards-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #333;
+}
+
+.card-id-cell {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    min-width: 250px; /* aumentado */
+    word-break: break-word;
+    white-space: nowrap; /* evita que se divida */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uses-cell {
+    text-align: center;
+    font-weight: 600;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 16px;
+}
+
+/* INPUT DE EDICIÓN */
+.edit-input {
+    width: 100%;
+    padding: 6px 10px;
+    border: 2px solid #4a4cb8;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: #3b3d99;
+}
+
+/* ACCIONES DE TABLA */
+.table-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-table {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-edit {
+    background: #d4a72c;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #b89324;
+}
+
+.btn-delete {
+    background: #b94a48;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #a03e3c;
+}
+
+.btn-save {
+    background: #4f8a5b;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #41744b;
+}
+
+.btn-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #5a6268;
+}
+
+/* BOTONES DEL HEADER */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-back {
+    background: white;
+    color: #4a4cb8;
+}
+
+.btn-back:hover {
+    background: #f0f0f0;
+}
+
+.btn-logout {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-logout:hover {
+    background: #c82333;
+}
+
+/* PAGINACIÓN */
+.pagination {
+    max-width: 1400px;
+    margin: 20px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagination-btn {
+    padding: 8px 16px;
+    background: white;
+    color: #4a4cb8;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: #f0f0f0;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-numbers {
+    display: flex;
+    gap: 5px;
+}
+
+.pagination-number {
+    width: 36px;
+    height: 36px;
+    background: white;
+    color: #4a4cb8;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pagination-number:hover {
+    background: #f0f0f0;
+}
+
+.pagination-number.active {
+    background: #4a4cb8;
+    color: white;
+}
+
+.pagination-dots {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+}
+
+.pagination-info {
+    color: white;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .cards-table {
+        font-size: 13px;
+    }
+    
+    .cards-table th,
+    .cards-table td {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 20px 15px;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-title {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .header-actions {
+        flex-direction: column;
+    }
+
+    .table-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-input {
+        min-width: 100%;
+    }
+
+    .table-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        overflow-x: auto; /* ← AGREGAR ESTO */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .cards-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1000px; /* ← Y ESTO */
+    }
+
+    .card-id-cell {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        min-width: 280px; /* más ancho */
+        white-space: nowrap;
+    }
+
+    .pagination {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .pagination-info {
+        order: 3;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-title {
+        font-size: 24px;
+    }
+
+    .btn-table {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .pagination-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .pagination-number {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .pagination-numbers {
+        gap: 2px;
+    }
+}
