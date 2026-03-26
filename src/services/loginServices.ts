@@ -11,8 +11,8 @@ export const loginServices = {
             const response = await api.post<LoginResponse>(
                 API_CONFIG.ENDPOINTS.AUTH.LOGIN,
                 {
-                    Email,
-                    Password
+                    email:Email,
+                    password:Password
                 }
             );
             if(response.data.data?.token){
