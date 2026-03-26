@@ -43,7 +43,15 @@ export default function AdminMain() {
             Ir a tarjetas
           </button>
         </article>
+        <article className="admin-main-card">
+          <h2>Verificar qr</h2>
+          <p>Sección de visualización de uso de tarjetas.</p>
+          <button className="admin-main-btn admin-main-btn-primary" onClick={()=>navigate("/QrVerify")}>
+            Ir a tarjetas
+          </button>
+        </article>
       </section>
+      
     </div>
   );
 }
