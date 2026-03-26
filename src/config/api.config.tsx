@@ -1,5 +1,5 @@
 export const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:5297',
+  BASE_URL: import.meta.env.VITE_API_URL || 'https://agreementsservices-final.onrender.com',
   ENDPOINTS: {
     AUTH: {
       LOGIN: '/api/auth/login',
@@ -23,8 +23,12 @@ export const API_CONFIG = {
         CARGAREXCEL: '/api/student/excel'
     },
     CONVENIOS: {
-      LISTAR: '/api/convenios',
-      OBTENER: '/api/convenios',
+      LISTAR: '/api/agreements',
+      OBTENER: '/api/agreements/',      
+      CREAR: '/api/agreements',          
+      ACTUALIZAR: '/api/agreements/',    
+      CAMBIAR_ESTADO: '/api/agreements/State/',  
+      ELIMINAR: '/api/agreements/' 
     },
   },
 };
