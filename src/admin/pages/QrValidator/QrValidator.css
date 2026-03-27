@@ -30,12 +30,71 @@
 .subtitle {
     text-align: center;
     color: #7f8c8d;
-    margin: 0 0 30px 0;
+    margin: 0 0 24px 0;
     font-size: 14px;
 }
 
+/* BOTÓN ESCANEAR */
+.btn-scan-qr {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #4a4cb8, #3b3d99);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-scan-qr:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 76, 184, 0.3);
+}
+
+/* ESCÁNER */
+.scanner-section {
+    margin: 20px 0;
+}
+
+#qr-scanner-container {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#qr-scanner-container video {
+    width: 100%;
+    height: auto;
+}
+
+.btn-stop-scan {
+    width: 100%;
+    padding: 12px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.3s;
+}
+
+.btn-stop-scan:hover {
+    background: #c0392b;
+}
+
+/* INPUT MANUAL */
 .qr-input-group {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .qr-input-group label {
@@ -62,6 +121,13 @@
     box-shadow: 0 0 0 3px rgba(74, 76, 184, 0.1);
 }
 
+.qr-input:disabled {
+    background: #ecf0f1;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ESTADOS */
 .loading-text {
     text-align: center;
     color: #3498db;
@@ -85,6 +151,7 @@
     border-radius: 6px;
 }
 
+/* DETALLES DE TARJETA */
 .card-details {
     background: #f8f9fa;
     padding: 24px;
@@ -124,22 +191,7 @@
     font-weight: 500;
 }
 
-.detail-row .value.status {
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-}
-
-.detail-row .value.status.active {
-    background: #d4edda;
-    color: #155724;
-}
-
-.detail-row .value.status.inactive {
-    background: #f8d7da;
-    color: #721c24;
-}
-
+/* CONVENIOS */
 .agreement-select {
     margin: 24px 0;
 }
@@ -156,6 +208,23 @@
     color: #e74c3c;
     font-size: 14px;
     margin: 0;
+}
+
+.select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: white;
+}
+
+.select:focus {
+    outline: none;
+    border-color: #4a4cb8;
+    box-shadow: 0 0 0 3px rgba(74, 76, 184, 0.1);
 }
 
 .agreement-info {
@@ -178,23 +247,7 @@
     font-size: 12px;
 }
 
-.select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 2px solid #ecf0f1;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s;
-    background: white;
-}
-
-.select:focus {
-    outline: none;
-    border-color: #4a4cb8;
-    box-shadow: 0 0 0 3px rgba(74, 76, 184, 0.1);
-}
-
+/* BOTONES ACCIÓN */
 .btn-validate {
     width: 100%;
     padding: 14px;
@@ -218,6 +271,24 @@
     transform: translateY(0);
 }
 
+.btn-clear {
+    width: 100%;
+    padding: 12px;
+    background: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+}
+
+.btn-clear:hover {
+    background: #7f8c8d;
+}
+
+/* RESULTADO VALIDACIÓN */
 .validation-result {
     padding: 16px;
     border-radius: 8px;
@@ -251,23 +322,6 @@
     border: 2px solid #dc3545;
 }
 
-.btn-clear {
-    width: 100%;
-    padding: 12px;
-    background: #95a5a6;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 8px;
-}
-
-.btn-clear:hover {
-    background: #7f8c8d;
-}
-
 /* RESPONSIVE */
 @media (max-width: 600px) {
     .qr-card {
@@ -280,6 +334,11 @@
 
     .subtitle {
         font-size: 12px;
+    }
+
+    .btn-scan-qr {
+        padding: 14px;
+        font-size: 14px;
     }
 
     .detail-row {
@@ -311,6 +370,7 @@
         font-size: 20px;
     }
 
+    .btn-scan-qr,
     .btn-validate {
         padding: 12px;
         font-size: 14px;
