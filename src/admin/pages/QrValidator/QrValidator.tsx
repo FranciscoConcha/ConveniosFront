@@ -34,6 +34,47 @@ export default function QRValidator() {
         }
     }, [scanning]);
 
+    // Manejar el scanner cuando scanning = true
+    useEffect(() => {
+        if (!scanning) return;
+
+        // Esperar a que el DOM se actualice
+        const timer = setTimeout(() => {
+            const container = document.getElementById("qr-scanner-container");
+            if (!container) {
+                setError("No se pudo acceder a la cámara");
+                setScanning(false);
+                return;
+            }
+
+            const scanner = new Html5QrcodeScanner(
+                "qr-scanner-container",
+                { fps: 10, qrbox: { width: 250, height: 250 } },
+                false
+            );
+
+            scanner.render(
+                (decodedText) => {
+                    setQrInput(decodedText);
+                    handleQRDetected(decodedText);
+                    stopQRScan();
+                },
+                (error) => {
+                    console.debug("Scanning error:", error);
+                }
+            );
+
+            scannerRef.current = scanner;
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+            if (scannerRef.current) {
+                scannerRef.current.clear().catch(() => {});
+            }
+        };
+    }, [scanning]);
+
     const loadAgreements = async () => {
         try {
             const response = await agreementsServices.getAllAgreements();
@@ -52,33 +93,12 @@ export default function QRValidator() {
         setError("");
         setQrInput("");
         setCardData(null);
-
-        const scanner = new Html5QrcodeScanner(
-            "qr-scanner-container",
-            { fps: 10, qrbox: { width: 250, height: 250 } },
-            false
-        );
-
-        scanner.render(
-            (decodedText) => {
-                // QR leído exitosamente
-                setQrInput(decodedText);
-                handleQRDetected(decodedText);
-                stopQRScan();
-            },
-            (error) => {
-                // Error silencioso durante el escaneo
-                console.debug("Scanning error:", error);
-            }
-        );
-
-        scannerRef.current = scanner;
     };
 
     // Detener escaneo QR
     const stopQRScan = () => {
         if (scannerRef.current) {
-            scannerRef.current.clear();
+            scannerRef.current.clear().catch(() => {});
             setScanning(false);
         }
     };
@@ -136,7 +156,6 @@ export default function QRValidator() {
             return;
         }
 
-        // Validación: Verificar fecha de vencimiento de la tarjeta
         const today = new Date();
         const cardDate = new Date(cardData.periodStundet);
 
@@ -148,7 +167,6 @@ export default function QRValidator() {
             return;
         }
 
-        // Validación: Verificar que el convenio esté dentro de sus fechas
         const selectedAgreementData = agreements.find(a => a.name === selectedAgreement);
 
         if (selectedAgreementData) {
@@ -172,7 +190,6 @@ export default function QRValidator() {
             }
         }
 
-        // Si todo es válido
         setValidationResult({
             valid: true,
             message: `✅ Acceso válido a: ${selectedAgreement}`
