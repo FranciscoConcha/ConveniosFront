@@ -31,7 +31,7 @@
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));  /* ← Reducir minmax de 300px a 280px */
   gap: 20px;
 }
 
@@ -62,6 +62,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease;
+  width: 100%;  /* ← AGREGAR ESTO */
 }
 
 .admin-main-btn-primary {
@@ -97,9 +98,17 @@
   cursor: not-allowed;
 }
 
-@media (max-width: 768px) {
+/* RESPONSIVE MEJORADO */
+@media (max-width: 900px) {
+  .admin-main-content {
+    grid-template-columns: repeat(2, 1fr);  /* ← 2 columnas en tablet */
+  }
+}
+
+@media (max-width: 600px) {
   .admin-main-container {
     padding: 20px 14px;
+    padding-bottom: 80px;  /* ← Reducir padding-bottom */
   }
 
   .admin-main-header {
@@ -116,7 +125,35 @@
     flex-direction: column;
   }
 
+  .admin-main-content {
+    grid-template-columns: 1fr;  /* ← 1 columna en móvil */
+    gap: 16px;
+  }
+
+  .admin-main-card {
+    padding: 18px;
+  }
+
+  .admin-main-card h2 {
+    font-size: 20px;
+  }
+
+  .admin-main-card p {
+    font-size: 14px;
+  }
+
   .admin-main-btn {
-    width: 100%;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .admin-main-card {
+    padding: 14px;
+  }
+
+  .admin-main-title {
+    font-size: 22px;
   }
 }
