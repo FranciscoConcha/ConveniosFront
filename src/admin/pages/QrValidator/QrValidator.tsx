@@ -4,7 +4,7 @@ import { cardAdminServices } from "../../Services/CardServices";
 import { agreementsServices } from "../../Services/AgreementsServices";
 import type { ViewCardListDto } from "../../../interfaces/card.type";
 import type { GetAgreementsDto } from "../../interfaces/Agreements.type";
-import "./qrValidator.css";
+import "./QrValidator.css";
 import HamburgerMenu from "../../../components/SideMenu/sideMenu";
 
 export default function QRValidator() {
