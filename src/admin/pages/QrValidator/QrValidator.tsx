@@ -109,21 +109,18 @@ export default function QRValidator() {
             setLoading(true);
             setError("");
 
-            const allCards = await cardAdminServices.getAllCards();
+            const response = await cardAdminServices.checkData(qrValue);
 
-            if (allCards?.success && allCards?.student) {
-                const found = allCards.student.find(card =>
-                    card.idCardPublic.includes(qrValue) || card.id.toString() === qrValue
-                );
-
-                if (found) {
-                    setCardData(found);
-                } else {
-                    setError("Tarjeta no encontrada");
-                    setCardData(null);
-                }
+            if (response?.success && response?.data) {
+                // Solo guardar lo que devuelve el endpoint
+                setCardData({
+                    idCardPublic: response.data.idpublic,
+                    nameStudent: response.data.studentName,
+                    career: response.data.careerStudent
+                } as ViewCardListDto);
             } else {
-                setError("Error al buscar tarjeta");
+                setError(response?.message || "Tarjeta no encontrada");
+                setCardData(null);
             }
         } catch (err) {
             setError("Error al buscar tarjeta");
@@ -145,7 +142,7 @@ export default function QRValidator() {
         }
     };
 
-    const validateCard = () => {
+    const validateCard = async () => {
         if (!cardData) {
             setValidationResult({ valid: false, message: "Escanea una tarjeta primero" });
             return;
@@ -162,10 +159,11 @@ export default function QRValidator() {
         if (cardDate < today) {
             setValidationResult({
                 valid: false,
-                message: "❌ Tarjeta vencida"
+                message: " Tarjeta vencida"
             });
             return;
         }
+        
 
         const selectedAgreementData = agreements.find(a => a.name === selectedAgreement);
 
@@ -176,7 +174,7 @@ export default function QRValidator() {
             if (today < startDate) {
                 setValidationResult({
                     valid: false,
-                    message: `❌ Convenio aún no vigente (inicia el ${startDate.toLocaleDateString()})`
+                    message: ` Convenio aún no vigente (inicia el ${startDate.toLocaleDateString()})`
                 });
                 return;
             }
@@ -184,15 +182,16 @@ export default function QRValidator() {
             if (today > endDate) {
                 setValidationResult({
                     valid: false,
-                    message: `❌ Convenio ya expiró (finalizó el ${endDate.toLocaleDateString()})`
+                    message: ` Convenio ya expiró (finalizó el ${endDate.toLocaleDateString()})`
                 });
                 return;
             }
         }
+        await cardAdminServices.incrementUseCard(cardData.idCardPublic);
 
         setValidationResult({
             valid: true,
-            message: `✅ Acceso válido a: ${selectedAgreement}`
+            message: ` Acceso válido a: ${selectedAgreement}`
         });
     };
 
@@ -213,13 +212,13 @@ export default function QRValidator() {
 
             <div className="qr-validator-container">
                 <div className="qr-card">
-                    <h2>🔍 Validador de Tarjetas</h2>
+                    <h2>Validador de Tarjetas</h2>
                     <p className="subtitle">Escanea el código QR o ingresa el ID manualmente</p>
 
                     {/* ESCANEO QR */}
                     {!scanning && !cardData && (
                         <button className="btn-scan-qr" onClick={startQRScan}>
-                            📷 Abrir Cámara para Escanear QR
+                             Abrir Cámara para Escanear QR
                         </button>
                     )}
 
@@ -228,7 +227,7 @@ export default function QRValidator() {
                         <div className="scanner-section">
                             <div id="qr-scanner-container"></div>
                             <button className="btn-stop-scan" onClick={stopQRScan}>
-                                ✕ Detener escaneo
+                                 Detener escaneo
                             </button>
                         </div>
                     )}
@@ -250,15 +249,15 @@ export default function QRValidator() {
                     )}
 
                     {/* LOADING */}
-                    {loading && <p className="loading-text">⏳ Buscando tarjeta...</p>}
+                    {loading && <p className="loading-text"> Buscando tarjeta...</p>}
 
                     {/* ERROR */}
-                    {error && <p className="error-text">⚠️ {error}</p>}
+                    {error && <p className="error-text"> {error}</p>}
 
                     {/* DATOS DE TARJETA */}
                     {cardData && (
                         <div className="card-details">
-                            <h3>📋 Datos de la Tarjeta</h3>
+                            <h3> Datos de la Tarjeta</h3>
 
                             <div className="detail-row">
                                 <span className="label">Nombre:</span>
@@ -334,7 +333,7 @@ export default function QRValidator() {
                     {/* BOTÓN LIMPIAR */}
                     {cardData && (
                         <button className="btn-clear" onClick={handleClear}>
-                            🔄 Escanear otra tarjeta
+                             Escanear otra tarjeta
                         </button>
                     )}
                 </div>

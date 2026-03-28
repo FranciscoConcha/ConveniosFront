@@ -8,11 +8,14 @@ export const API_CONFIG = {
     },
     TARJETA: {
       OBTENER: '/api/Card/',
-      VERIFICAR: '/api/card/verificate/'
+      VERIFICAR: '/api/card/verificate/',
+      COMPORBAR: 'api/card/check'
     },
     TARJETAADMIN:{
         OBTENERLISTA: '/api/Card/',
-        OBTENERPORID: '/api/Card/id='
+        OBTENERPORID: '/api/Card/id=',
+        INCREMENTUSE: 'api/card'
+
     },
     ESTUDIANTES:{
         OBTENERLISTA: '/api/student/',

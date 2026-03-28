@@ -65,5 +65,38 @@ export const cardAdminServices = {
                 return error.response.data;
             }
         }
+    },
+    checkData: async(idPublic:string ) =>{
+        try{
+            const response =await api.get(
+                API_CONFIG.ENDPOINTS.TARJETA.COMPORBAR,
+                {
+                    data:{idPublic}
+                }
+            );
+            return response.data;
+        }catch(error: unknown){
+            if(axios.isAxiosError(error)){
+                return error.response?.data || {success: false, message:"Datos no encontrados"};
+            }
+            return {success: false, message:"datos no encontrados"};
+        }
+
+    },
+    incrementUseCard: async (idPublic: string)=>{
+        try{
+            const response =await api.patch(
+                API_CONFIG.ENDPOINTS.TARJETAADMIN.INCREMENTUSE,
+                {
+                    idPublic
+                }
+            );
+            return response.data;
+        }catch(error: unknown){
+            if(axios.isAxiosError(error)){
+                return error.response?.data || {success: false, message:"Datos no encontrados"};
+            }
+            return {success: false, message:"datos no encontrados"};
+        }
     }
 };

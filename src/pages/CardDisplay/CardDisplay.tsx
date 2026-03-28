@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import QRCode from "react-qr-code";
 import "./CardDisplay.css";
 import { cardServices } from "../../services/cardServices";
 import type { ViewCardDto } from "../../interfaces/card.type";
@@ -21,8 +22,8 @@ export default function CardDisplay() {
         const handleGetData = async () => {
             try {
                 const response = await cardServices.getDataForCard(rut);
-                
-                if (response?.success && response?.card) {
+                console.log(response)
+                if (response?.card) {
                     setData({
                         ...response.card,
                         periodStundet: new Date(response.card.periodStundet).toISOString()
@@ -93,7 +94,16 @@ export default function CardDisplay() {
                                 <p className="card-subtitle">Tarjeta Estudiantil</p>
                             </div>
                             
-                            <div className="card-chip-yellow"></div>
+                            {/* QR EN LUGAR DEL CHIP */}
+                            <div className="card-qr-chip">
+                                <QRCode
+                                    value={data.idCardPublic}
+                                    size={64}
+                                    level="H"
+                                    fgColor="#000000"
+                                    bgColor="#ffffff"
+                                />
+                            </div>
                             
                             <div className="card-user-data">
                                 <div className="data-group full-width">
