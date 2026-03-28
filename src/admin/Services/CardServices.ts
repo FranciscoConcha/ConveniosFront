@@ -71,7 +71,7 @@ export const cardAdminServices = {
             const response =await api.get(
                 API_CONFIG.ENDPOINTS.TARJETA.COMPORBAR,
                 {
-                    data:{idPublic}
+                    data:{publicIdCard:idPublic}
                 }
             );
             return response.data;
@@ -88,7 +88,7 @@ export const cardAdminServices = {
             const response =await api.patch(
                 API_CONFIG.ENDPOINTS.TARJETAADMIN.INCREMENTUSE,
                 {
-                    idPublic
+                    data: {publicIdCard:idPublic}
                 }
             );
             return response.data;
