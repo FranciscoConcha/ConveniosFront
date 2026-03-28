@@ -69,10 +69,8 @@ export const cardAdminServices = {
     checkData: async(idPublic:string ) =>{
         try{
             const response =await api.get(
-                API_CONFIG.ENDPOINTS.TARJETA.COMPORBAR,
-                {
-                    data:{publicIdCard:idPublic}
-                }
+                API_CONFIG.ENDPOINTS.TARJETA.COMPORBAR+idPublic,
+                
             );
             return response.data;
         }catch(error: unknown){
