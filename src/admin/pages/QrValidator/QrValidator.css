@@ -10,6 +10,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    padding-bottom: 60px;
 }
 
 .qr-card {
@@ -18,6 +20,8 @@
     padding: 40px;
     width: 100%;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    max-height: 90vh;
 }
 
 .qr-card h2 {
@@ -359,11 +363,12 @@
 
 @media (max-width: 400px) {
     .qr-validator-container {
-        margin: 20px auto;
+        padding-bottom: 80px;
     }
 
     .qr-card {
-        padding: 16px;
+        padding: 20px;
+        margin-bottom: 20px;
     }
 
     .qr-card h2 {
