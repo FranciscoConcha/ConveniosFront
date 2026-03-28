@@ -9,7 +9,7 @@ export const API_CONFIG = {
     TARJETA: {
       OBTENER: '/api/Card/',
       VERIFICAR: '/api/card/verificate/',
-      COMPORBAR: 'api/card/check/'
+      COMPORBAR: 'api/card/check'
     },
     TARJETAADMIN:{
         OBTENERLISTA: '/api/Card/',

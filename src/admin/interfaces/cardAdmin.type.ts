@@ -16,7 +16,11 @@ export interface ViewCardListDto {
     career: string;
     uses: number;
 }
-
+export interface DataVerify{
+    idpublic:string,
+    studentName:string,
+    careerStudent:string
+}
 export interface ResponseViewCardDto {
     message: string;
     success: boolean;

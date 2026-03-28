@@ -2,14 +2,14 @@ import { useEffect, useState, useRef } from "react";
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { cardAdminServices } from "../../Services/CardServices";
 import { agreementsServices } from "../../Services/AgreementsServices";
-import type { ViewCardListDto } from "../../../interfaces/card.type";
+import type { DataVerify } from "../../interfaces/cardAdmin.type";
 import type { GetAgreementsDto } from "../../interfaces/Agreements.type";
 import "./QrValidator.css";
 import HamburgerMenu from "../../../components/SideMenu/sideMenu";
 
 export default function QRValidator() {
     const [qrInput, setQrInput] = useState("");
-    const [cardData, setCardData] = useState<ViewCardListDto | null>(null);
+    const [cardData, setCardData] = useState<DataVerify | null>(null);
     const [agreements, setAgreements] = useState<GetAgreementsDto[]>([]);
     const [selectedAgreement, setSelectedAgreement] = useState("");
     const [validationResult, setValidationResult] = useState<{ valid: boolean; message: string } | null>(null);
@@ -110,14 +110,18 @@ export default function QRValidator() {
             setError("");
 
             const response = await cardAdminServices.checkData(qrValue);
+            console.log("Response from checkData:", response);  // ← AGREGA ESTO
+            console.log("Success?", response?.success);        // ← Y ESTO
+            console.log("Data?", response?.data);     
 
-            if (response?.success && response?.data) {
+            if ( response?.data) {
                 // Solo guardar lo que devuelve el endpoint
+                console.log(response)
                 setCardData({
-                    idCardPublic: response.data.idpublic,
-                    nameStudent: response.data.studentName,
-                    career: response.data.careerStudent
-                } as ViewCardListDto);
+                    idpublic: response.data.idpublic,
+                    studentName: response.data.studentName,
+                    careerStudent: response.data.careerStudent
+                } as DataVerify);
             } else {
                 setError(response?.message || "Tarjeta no encontrada");
                 setCardData(null);
@@ -138,6 +142,7 @@ export default function QRValidator() {
         setValidationResult(null);
 
         if (value.length > 5) {
+            console.log("Calling handleQRDetected");
             await handleQRDetected(value);
         }
     };
@@ -153,41 +158,11 @@ export default function QRValidator() {
             return;
         }
 
-        const today = new Date();
-        const cardDate = new Date(cardData.periodStundet);
-
-        if (cardDate < today) {
-            setValidationResult({
-                valid: false,
-                message: " Tarjeta vencida"
-            });
-            return;
-        }
+       
         
 
-        const selectedAgreementData = agreements.find(a => a.name === selectedAgreement);
-
-        if (selectedAgreementData) {
-            const startDate = new Date(selectedAgreementData.startDate);
-            const endDate = new Date(selectedAgreementData.endDate);
-
-            if (today < startDate) {
-                setValidationResult({
-                    valid: false,
-                    message: ` Convenio aún no vigente (inicia el ${startDate.toLocaleDateString()})`
-                });
-                return;
-            }
-
-            if (today > endDate) {
-                setValidationResult({
-                    valid: false,
-                    message: ` Convenio ya expiró (finalizó el ${endDate.toLocaleDateString()})`
-                });
-                return;
-            }
-        }
-        await cardAdminServices.incrementUseCard(cardData.idCardPublic);
+        
+        await cardAdminServices.incrementUseCard(cardData.idpublic);
 
         setValidationResult({
             valid: true,
@@ -261,25 +236,17 @@ export default function QRValidator() {
 
                             <div className="detail-row">
                                 <span className="label">Nombre:</span>
-                                <span className="value">{cardData.nameStudent}</span>
+                                <span className="value">{cardData.studentName}</span>
                             </div>
 
                             <div className="detail-row">
                                 <span className="label">Carrera:</span>
-                                <span className="value">{cardData.career}</span>
+                                <span className="value">{cardData.careerStudent}</span>
                             </div>
 
-                            <div className="detail-row">
-                                <span className="label">Vencimiento:</span>
-                                <span className="value">
-                                    {new Date(cardData.periodStundet).toLocaleDateString()}
-                                </span>
-                            </div>
+                            
 
-                            <div className="detail-row">
-                                <span className="label">Usos:</span>
-                                <span className="value">{cardData.uses}</span>
-                            </div>
+                            
 
                             {/* SELECCIONAR CONVENIO */}
                             <div className="agreement-select">
@@ -318,7 +285,7 @@ export default function QRValidator() {
 
                             {/* BOTÓN VALIDAR */}
                             <button className="btn-validate" onClick={validateCard}>
-                                ✓ Validar Acceso
+                                    Validar convenio
                             </button>
                         </div>
                     )}
