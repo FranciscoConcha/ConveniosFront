@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { cardServices } from "../../services/cardServices";
+import Modal from "../../components/Modal";
 import "./RutVerificate.css"
 
 export default function RutVerificate(){
@@ -81,7 +82,9 @@ export default function RutVerificate(){
                     
                     {Error && <p className="error-message" style={{color:"red"}}>{Error}</p>}
                     
-                    {Verificate && <p style={{color: "green"}}>Verificando RUT...</p>}
+                    <Modal isOpen={Verificate} isLoading={true}>
+                        <p style={{color: "green"}}>Verificando RUT...</p>
+                    </Modal>
 
                     <button 
                         className="btn btn-primary"
