@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { cardServices } from "../../services/cardServices";
+import Modal from "../../components/Modal";
 import "./RutVerificate.css"
 
 export default function RutVerificate(){
@@ -9,6 +10,7 @@ export default function RutVerificate(){
     const [Rut,SetRut] = useState("");
     const [Error, SetError] = useState("");
     const navigate= useNavigate();
+    const SEPARATOR_RUT = "-";
 
     const ValidateRut=(rut: string)=>{
         if(!rut.trim()){
@@ -29,7 +31,7 @@ export default function RutVerificate(){
 
     const handleVerificateRut = async () => {
         if(!ValidateRut(Rut)){
-            SetError("Rut no válido o formato inválido");    
+            SetError("RUT no válido o formato inválido");    
             return;
         }
         
@@ -63,6 +65,22 @@ export default function RutVerificate(){
         SetError(""); 
     }
 
+    const normalizeRUT = (RUT: string) => {
+        const pos = RUT.length - 1; 
+
+        if(!RUT.includes(SEPARATOR_RUT)){
+            return RUT.slice(0, pos) + SEPARATOR_RUT + RUT[RUT.length -1];
+        }
+        return RUT;
+    }
+
+    const handleRutBlur = () => {
+        if(Rut === "") {
+            return;
+        }
+        SetRut(normalizeRUT(Rut));
+    }
+
     return(
         <div className="main-container">
             <div className="card">
@@ -75,13 +93,16 @@ export default function RutVerificate(){
                     <input 
                         value={Rut}
                         onChange={handleRutChange}
+                        onBlur={handleRutBlur}
                         placeholder="Ingrese RUT: 12345678K"
                         className="input-Rut"
                     />
                     
                     {Error && <p className="error-message" style={{color:"red"}}>{Error}</p>}
                     
-                    {Verificate && <p style={{color: "green"}}>Verificando RUT...</p>}
+                    <Modal isOpen={Verificate} isLoading={true}>
+                        <p style={{color: "green"}}>Verificando RUT...</p>
+                    </Modal>
 
                     <button 
                         className="btn btn-primary"
